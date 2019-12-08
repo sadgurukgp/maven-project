@@ -47,7 +47,7 @@ agent any
 					{
 						withMaven(jdk: 'gpjdk', maven: 'gpmaven')
 							{
-								sh 'mvn build '
+								sh 'mvn package'
 							}
 					}
 				}
