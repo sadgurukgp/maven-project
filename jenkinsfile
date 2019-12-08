@@ -8,6 +8,25 @@ agent any
 	stages
 	{
 			stage('git clone')
-			git 'https://github.com/sadgurukgp/maven-project'
+			{ 
+				steps
+				{
+					git 'https://github.com/sadgurukgp/maven-project'
+				
+				}	
+			
+			}
+		}
+	
+
+stage ('compile project')
+{
+	steps
+	{
+		withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+			{
+    				sh 'mvn compile'
+			}
 	}
+}
 }
