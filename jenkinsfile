@@ -34,7 +34,7 @@ pipeline
 		{
             steps
 			{
-                withMaven(maven : 'gpMaven' jdk : 'gpjdk') 
+                withMaven(maven : 'gpMaven') 
 				{
                     sh 'mvn install'
                 }
