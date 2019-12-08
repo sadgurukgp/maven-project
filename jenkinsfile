@@ -4,17 +4,35 @@ pipeline
 
     stages 
 	{
-          stage('SCM Checkout')
-		    {
-				git 'https://github.com/sadgurukgp/maven-project'
-			}
-  
-    
-        stage ('Compile Stage')
-		{
+	
+	
+		stage('git clone')
+				{ 
+					steps
+					{
+						git 'https://github.com/sadgurukgp/maven-project'
 
-            steps 
+					}	
+
+				}
+		
+		
+		stage ('install Stage') 
 				{
+            				steps
+			{
+              			  withMaven(maven : 'LocalMaven') 
+				{
+                   			 sh 'mvn install'
+               			 }
+           		 }
+        }
+    
+      		  stage ('Compile Stage')
+				{
+
+            				steps 
+					{
 					withMaven(maven : 'LocalMaven') 
 					{
                     sh 'mvn clean compile'
@@ -45,17 +63,16 @@ pipeline
                 }
             }
         }
-        stage ('deploy to dev')
+        stage ('deploy to tom')
 		{
              steps 
 			{
-                  node
-					{
-						sshagent (credentials: ['deploy-dev']) 
+                  
+						sshagent (['tomcat']) 
 							{
 								sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.45.93:/var/lib/tomcat/webapps'
 							}
-					}
+					
 			}
 
 
