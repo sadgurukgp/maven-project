@@ -28,36 +28,13 @@ pipeline
            		 }
         }
     
-      		  stage ('Compile Stage')
-				{
+      		 
 
-            				steps 
-					{
-					withMaven(maven : 'LocalMaven') 
-					{
-                    sh 'mvn clean compile'
-					}
-				}
-        }
-
-        stage ('Testing Stage')
-		{
-
-            steps 
-			{
-                withMaven(maven : 'LocalMaven')
-				{
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('install Stage') 
+                stage ('install Stage') 
 		{
             steps
 			{
-                withMaven(maven : 'LocalMaven') 
+                withMaven(maven : 'gpMaven' jdk : 'gpjdk') 
 				{
                     sh 'mvn install'
                 }
