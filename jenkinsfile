@@ -16,17 +16,19 @@ agent any
 					}	
 
 				}
-		}
+		
 	
 
-		stage ('compile project')
-		{
-			steps
-			{
-				withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+				stage ('compile mvn')
+				{
+					steps
 					{
-						sh 'mvn compile'
+						withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+							{
+								sh 'mvn compile'
+							}
 					}
-			}
+				}
+				
 		}
 }
