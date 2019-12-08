@@ -2,31 +2,31 @@
 
 
 pipeline
-
-agent any
 {
-	stages
-	{
-			stage('git clone')
-			{ 
-				steps
-				{
-					git 'https://github.com/sadgurukgp/maven-project'
-				
-				}	
-			
-			}
+agent any
+
+		stages
+		{
+				stage('git clone')
+				{ 
+					steps
+					{
+						git 'https://github.com/sadgurukgp/maven-project'
+
+					}	
+
+				}
 		}
 	
 
-stage ('compile project')
-{
-	steps
-	{
-		withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+		stage ('compile project')
+		{
+			steps
 			{
-    				sh 'mvn compile'
+				withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+					{
+						sh 'mvn compile'
+					}
 			}
-	}
-}
+		}
 }
