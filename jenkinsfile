@@ -41,6 +41,17 @@ agent any
 					}
 				}
 				
+				stage ('Build mvn')
+				{
+					steps
+					{
+						withMaven(jdk: 'gpjdk', maven: 'gpmaven')
+							{
+								sh 'mvn build '
+							}
+					}
+				}
+				
 				
 		}
 }
